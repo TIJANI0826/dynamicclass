@@ -1,0 +1,107 @@
+###kivy for quadratuc
+
+< for_quadratic >:
+    FloatLayout:
+        Label:
+            id: main_label
+            text: "QUADRATIC EQUATIONS"
+            size_hint: None, None
+            width: root.width / 2
+            height: 45
+            font_size: 30
+            bold: True
+            pos_hint: {"x": .25, "top": 1}
+        Label:
+            id: label_one
+            text: "VALUE A"
+            size_hint: None, None
+            width: root.width / 2
+            font_size: 20
+            height: 40
+            bold: True
+            pos_hint: {"x": 0, "y": .8}
+
+        TextInput:
+            id: value_one
+            hint_text: "type"
+            size_hint: None, None
+            width: root.width / 2
+            height: 55
+            font_size: 20
+            bold: True
+            multiline: False
+            padding: root.height / self.height
+            pos_hint: {"x": .5, "y": .8}
+
+        Label:
+            id: label_two
+            text: "VALUE B"
+            size_hint: None, None
+            width: root.width / 2
+            font_size: 20
+            height: 40
+            bold: True
+            pos_hint: {"x": 0, "y": .7}
+
+        TextInput:
+            id: value_two
+            hint_text: "type"
+            size_hint: None, None
+            width: root.width / 2
+            height: 55
+            font_size: 20
+            bold: True
+            multiline: False
+            padding: root.height / self.height
+            pos_hint: {"x": .5, "y": .7}
+
+        Label:
+            id: label_three
+            text: "VALUE C"
+            size_hint: None, None
+            width: root.width / 2
+            font_size: 20
+            height: 40
+            bold: True
+            pos_hint: {"x": 0, "y": .6}
+
+        TextInput:
+            id: value_three
+            hint_text: "type"
+            size_hint: None, None
+            width: root.width / 2
+            height: 55
+            font_size: 20
+            bold: True
+            multiline: False
+            padding: root.height / self.height
+            pos_hint: {"x": .5, "y": .6}
+
+        Button:
+            id: submit_button
+            text: "CALCULATE"
+            size_hint: None, None
+            width: root.width / 2
+            font_size: 25
+            height: 57
+            italic: True
+            pos_hint: {"x": .5, "y": .5}
+            on_press: root.solve_solution()
+
+        Label:
+            id: result_label
+            text: "...."
+            size_hint: None, None
+            width: root.width
+            height: 100
+            font_size: 25
+            bold: True
+            pos_hint: {"x": 0, "y": .3}
+
+        Label:
+            text: " by vitriol"
+            size_hint: None, None
+            width: root.width / 2
+            font_size: 20
+            color: 0, 1, 0, 1
+            pos_hint: {"x": .25, "y": 0}
