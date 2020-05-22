@@ -1,10 +1,10 @@
-import kivy
-import sqlite3
-
-from kivy import app
-from kivy.app import App
-from kivy.properties import NumericProperty, ObjectProperty
-from kivy.lang.builder import Builder
+from kivymd.app import MDApp
+from kivymd.theming import ThemableBehavior
+from kivy.lang import Builder
+from kivy.uix.boxlayout import BoxLayout
+from kivymd.uix.behaviors import RectangularElevationBehavior
+from kivymd.uix.menu import MDDropdownMenu
+from kivy.properties import NumericProperty, ObjectProperty, StringProperty
 from kivy.storage.jsonstore import JsonStore
 from kivy.uix.button import Button
 from kivy.uix.gridlayout import GridLayout
@@ -18,78 +18,39 @@ from kivy.uix.spinner import Spinner
 from kivy.uix.stacklayout import StackLayout
 from kivy.uix.textinput import TextInput
 from kivy.uix.accordion import Accordion, AccordionItem
-from kivymd.accordion import MDAccordion, MDAccordionItem, MDAccordionSubItem
+# from kivymd.uix.accordion import MDAccordion, MDAccordionItem, MDAccordionSubItem
 from kivymd.theming import ThemeManager
-from kivymd.list import MDList, OneLineListItem, \
+from kivymd.uix.list import MDList, OneLineListItem, \
     OneLineAvatarListItem, OneLineIconListItem, ThreeLineListItem, \
     TwoLineListItem
-from kivymd.bottomsheet import MDListBottomSheet, MDGridBottomSheet
-from kivymd.button import MDIconButton
-from kivymd.date_picker import MDDatePicker
-from kivymd.list import ILeftBody, ILeftBodyTouch, IRightBodyTouch, BaseListItem
+from kivymd.uix.button import MDIconButton
+from kivymd.uix.list import ILeftBody, ILeftBodyTouch, IRightBodyTouch, BaseListItem
 from kivymd.material_resources import DEVICE_TYPE
-from kivymd.navigationdrawer import MDNavigationDrawer, NavigationDrawerHeaderBase, NavigationLayout, \
-    NavigationDrawerIconButton, NavigationDrawerToolbar
-from kivymd.selectioncontrols import MDCheckbox
-from kivymd.snackbar import Snackbar
-from kivymd.time_picker import MDTimePicker
+from kivymd.uix.navigationdrawer import MDNavigationDrawer, NavigationLayout
+from kivymd.uix.selectioncontrol import MDCheckbox
+from kivymd.uix.snackbar import Snackbar
 from kivy.uix.image import Image
+from kivymd import images_path
+from kivymd.uix.expansionpanel import MDExpansionPanel, MDExpansionPanelThreeLine
+from kivymd.uix.label import MDLabel
+from kivy.properties import BooleanProperty
+from kivy.uix.recycleview import RecycleView
+from kivy.uix.recycleview.views import RecycleDataViewBehavior
+from kivy.uix.recycleboxlayout import RecycleBoxLayout
+from kivy.uix.behaviors import FocusBehavior
+from kivy.uix.recycleview.layout import LayoutSelectionBehavior
 
 import datetime
-
-list_of_subject = []
-
-
-class MySceens(ScreenManager):
-    def __init__(self, **kwargs):
-        super(MySceens, self).__init__(**kwargs)
-
-
-class MyScreen(Screen, GridLayout):
-    def __init__(self, **kwargs):
-        super(MyScreen, self).__init__(**kwargs)
-        self.cols = 2
-
-
-class MainAppScreen(BoxLayout):
-    def __init__(self, **kwargs):
-        super(MainAppScreen, self).__init__(**kwargs)
-        self.screen_manager = ObjectProperty(None)
-        self.createSub = ObjectProperty(None)
-        self.sub = ObjectProperty(None)
-
-class CreateSubject(Screen, BoxLayout):
-    def __init__(self, **kwargs):
-        super(CreateSubject, self).__init__(**kwargs)
-        self.orientation = 'vertical'
-        self.sub_text = TextInput(hint_text='Input Your Subject', write_tab=False)
-        sub_button = Button(text='Create Subject', size_hint=(.2, .1), on_press=self.create_subject)
-        self.add_widget(self.sub_text)
-        self.add_widget(sub_button)
-
-    def create_subject(self, instance):
-        subject = self.sub_text.text.upper()
-        list_of_subject.append(subject)
-        subject_file = open('subject.txt', 'at')
-        subject_file.write(subject + '\n')
-        subject_file.close()
-        sub_pop = Popup(title='Subject Creation', size_hint=(.5, .5), auto_dismiss=True)
-        sub_pop_text = Label(text=self.sub_text.text)
-        sub_pop.add_widget(sub_pop_text)
-        return sub_pop.open()
-
-
+from readsubject import read_text
 class CreateQuestion(Screen, GridLayout):
     def __init__(self, **kwargs):
         super(CreateQuestion, self).__init__(**kwargs)
         self.cols = 1
 
-        with open('subject.txt', 'rt') as f:
-            for n in f.readlines():
-                list_of_subject.append(n)
+        subjects = read_text()
         self.subject = Spinner(
-            text=list_of_subject[0],
-            values=tuple([x for x in list_of_subject]),
+            text=subjects[0],
+            values=tuple([x for x in subjects]),
             size_hint=(.1, 0.1))
 
         # The Question number and question itself inside a boxlayout
@@ -139,58 +100,3 @@ class CreateQuestion(Screen, GridLayout):
                   option3=self.option3.text,
                   option4=self.option4.text,
                   answer=self.answer.text)
-
-
-class ViewQuestion(Screen, BoxLayout):
-    def __init__(self, **kwargs):
-        super(ViewQuestion, self).__init__(**kwargs)
-        self.accordion = Accordion(orientation='vertical')
-        self.get_question()
-
-    def get_question(self):
-        list_for_accord = []
-        list_for_sub_item = []
-        for i in list_of_subject:
-            store = JsonStore('{}.json'.format(i.strip('\n').upper()))
-            list_for_accord.append(i)
-            accord_item = AccordionItem(title=i, orientation='horizontal')
-            for key in store.keys():
-                p = Popup(title=key, size_hint=(.5, .5), auto_dismiss=True)
-                accord_sub_item = OneLineListItem(text=str(key))
-                accord_sub_item.bind(on_press=p.open)
-                accord_item.add_widget(accord_sub_item)
-
-                grid = GridLayout(cols=1)
-                l1 = Button(text=store[key]['question'])
-                l2 = Button(text=store[key]['option1'])
-                l3 = Button(text=store[key]['option2'])
-                l4 = Button(text=store[key]['option3'])
-                l5 = Button(text=store[key]['option4'])
-                l7 = TextInput(text='')
-                l6 = Button(text='see answer')
-                l6.bind(on_release=lambda x: setattr(l7, 'text', store[p.title]['answer']))
-
-                grid.add_widget(l1)
-                grid.add_widget(l2)
-                grid.add_widget(l3)
-                grid.add_widget(l4)
-                grid.add_widget(l5)
-                grid.add_widget(l6)
-                grid.add_widget(l7)
-
-                p.add_widget(grid)
-            self.accordion.add_widget(accord_item)
-        self.add_widget(self.accordion)
-
-
-class MainApp(App):
-    theme_cls = ThemeManager()
-    createSub = ObjectProperty(None)
-    sub = ObjectProperty(None)
-
-    def build(self):
-        return MainAppScreen()
-
-
-if __name__ == "__main__":
-    MainApp().run()

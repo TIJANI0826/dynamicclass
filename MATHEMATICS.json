@@ -1,1 +1,49 @@
-{"1": {"question": "Factorize y2 + 6y \u2013 27", "option1": "A. (y - 9) (y - 3)       \n", "option2": "B. (y + 9) (y - 3)      \n", "option3": "C. (y + 1)(y - 27)     \n", "option4": "D. (y + 9) (y+3) \n", "answer": "A"}, "2": {"question": "this is a rectangle", "option1": "A. yes", "option2": "B. no", "option3": "C. i dont know", "option4": "D. i can't tell", "answer": "C"},"3": {"question": "this is a triangle", "option1": "A. yes", "option2": "B. no", "option3": "C. i dont know", "option4": "D. i can't tell", "answer": "B"}}
+{
+    "1": {
+        "question": "Factorize y2 + 6y \u2013 27", 
+        "option1": "A. (y - 9) (y - 3)       \n", 
+        "option2": "B. (y + 9) (y - 3)      \n",
+        "option3": "C. (y + 1)(y - 27)     \n", 
+        "option4": "D. (y + 9) (y+3) \n", "answer": "A"
+    },
+    "2": {
+        "question": "this is a rectangle", 
+        "option1": "A. yes", 
+        "option2": "B. no", 
+        "option3": "C. i dont know", 
+        "option4": "D. i can't tell", 
+        "answer": "C"
+    },
+    "3": {
+        "question": "this is a square", 
+        "option1": "A. yes", 
+        "option2": "B. no", 
+        "option3": "C. i dont know", 
+        "option4": "D. i can't tell", 
+        "answer": "B"
+    },
+    "4": {
+        "question": "This is a pentagon", 
+        "option1": "A. yes", 
+        "option2": "B. no", 
+        "option3": "C. i dont know", 
+        "option4": "D. i can't tell", 
+        "answer": "B"
+    },
+    "5": {
+        "question": "This is a circle", 
+        "option1": "A. yes", 
+        "option2": "B. no", 
+        "option3": "C. i dont know", 
+        "option4": "D. i can't tell", 
+        "answer": "B"
+    },
+    "6": {
+        "question": "This is a pic", 
+        "option1": "A. yes", 
+        "option2": "B. no", 
+        "option3": "C. i dont know", 
+        "option4": "D. i can't tell", 
+        "answer": "B"
+    }
+}

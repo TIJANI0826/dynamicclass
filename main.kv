@@ -1,37 +1,23 @@
-#:import Toolbar kivymd.toolbar.Toolbar
 #:import ThemeManager kivymd.theming.ThemeManager
-#:import MDNavigationDrawer kivymd.navigationdrawer.MDNavigationDrawer
-#:import NavigationLayout kivymd.navigationdrawer.NavigationLayout
-#:import NavigationDrawerDivider kivymd.navigationdrawer.NavigationDrawerDivider
-#:import NavigationDrawerToolbar kivymd.navigationdrawer.NavigationDrawerToolbar
-#:import NavigationDrawerSubheader kivymd.navigationdrawer.NavigationDrawerSubheader
-#:import MDCheckbox kivymd.selectioncontrols.MDCheckbox
-#:import MDSwitch kivymd.selectioncontrols.MDSwitch
-#:import MDList kivymd.list.MDList
-#:import OneLineListItem kivymd.list.OneLineListItem
-#:import TwoLineListItem kivymd.list.TwoLineListItem
-#:import ThreeLineListItem kivymd.list.ThreeLineListItem
-#:import OneLineAvatarListItem kivymd.list.OneLineAvatarListItem
-#:import OneLineIconListItem kivymd.list.OneLineIconListItem
-#:import OneLineAvatarIconListItem kivymd.list.OneLineAvatarIconListItem
-#:import MDTextField kivymd.textfields.MDTextField
-#:import MDSpinner kivymd.spinner.MDSpinner
-#:import MDCard kivymd.card.MDCard
-#:import MDSeparator kivymd.card.MDSeparator
-#:import MDDropdownMenu kivymd.menu.MDDropdownMenu
+#:import MDNavigationDrawer kivymd.uix.navigationdrawer.MDNavigationDrawer
+#:import NavigationLayout kivymd.uix.navigationdrawer.NavigationLayout
+#:import MDCheckbox kivymd.uix.selectioncontrol.MDCheckbox
+#:import MDSwitch kivymd.uix.selectioncontrol.MDSwitch
+#:import MDList kivymd.uix.list.MDList
+#:import OneLineListItem kivymd.uix.list.OneLineListItem
+#:import TwoLineListItem kivymd.uix.list.TwoLineListItem
+#:import ThreeLineListItem kivymd.uix.list.ThreeLineListItem
+#:import OneLineAvatarListItem kivymd.uix.list.OneLineAvatarListItem
+#:import OneLineIconListItem kivymd.uix.list.OneLineIconListItem
+#:import OneLineAvatarIconListItem kivymd.uix.list.OneLineAvatarIconListItem
+#:import MDTextField kivymd.uix.textfield.MDTextField
+#:import MDSpinner kivymd.uix.spinner.MDSpinner
+#:import MDCard kivymd.uix.card.MDCard
+#:import MDSeparator kivymd.uix.card.MDSeparator
+#:import MDDropdownMenu kivymd.uix.menu.MDDropdownMenu
 #:import get_color_from_hex kivy.utils.get_color_from_hex
 #:import colors kivymd.color_definitions.colors
-#:import SmartTile kivymd.grid.SmartTile
-#:import MDSlider kivymd.slider.MDSlider
-#:import MDTabbedPanel kivymd.tabs.MDTabbedPanel
-#:import MDTab kivymd.tabs.MDTab
-#:import MDProgressBar kivymd.progressbar.MDProgressBar
-#:import MDAccordion kivymd.accordion.MDAccordion
-#:import MDAccordionItem kivymd.accordion.MDAccordionItem
-#:import MDAccordionSubItem kivymd.accordion.MDAccordionSubItem
-#:import MDThemePicker kivymd.theme_picker.MDThemePicker
-#:import MDBottomNavigation kivymd.tabs.MDBottomNavigation
-#:import MDBottomNavigationItem kivymd.tabs.MDBottomNavigationItem
+#:import MDSlider kivymd.uix.slider.MDSlider
 <MainAppScreen>:
     id : sud
     NavigationLayout:
@@ -39,7 +25,6 @@
         MDNavigationDrawer:
             id : nav_drawer
             drawer_logo: './assets/robin-944887_1280.jpg'
-            NavigationDrawerDivider:
             NavigationDrawerIconButton:
                 icon: 'book'
                 text: "ADD A SUBJECT"
